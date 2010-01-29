@@ -1,0 +1,7 @@
+Annotated Java for mongoDB
+
+This is a simple library that allows you to create simple Java classes (POJO)
+that are annotated in a mongoDB fashion. It provides a database wrapper to
+the mongoDB Java driver as well.
+
+Examples to come soon.
