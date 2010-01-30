@@ -95,6 +95,9 @@ class Inference {
                 collection = c.getSimpleName();
             }
         }
+        if(collection == null || "".equals(collection)){
+            collection = c.getSimpleName();
+        }
 		return collection;
 	}
 }

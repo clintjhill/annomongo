@@ -2,12 +2,12 @@ package com.h3osoftware.annomongo;
 
 import com.h3osoftware.annomongo.annotations.Collection;
 import com.h3osoftware.annomongo.annotations.Field;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import junit.framework.TestCase;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Author: Clint Hill
@@ -42,13 +42,13 @@ public class AbstractDatabaseObjectTest extends TestCase {
     }
 
     public void testSave() {
-        assertTrue(new ConcreteDAO().Save());
-        assertTrue(this.mdao.Save());
+        assertTrue(new ConcreteDAO().save());
+        assertTrue(this.mdao.save());
     }
 
     public void testFindEnum(){
-        this.mdao.Save();
-        Map<String, Object> query = new HashMap<String, Object>();
+        this.mdao.save();
+        DBObject query = new BasicDBObject();
         query.put("_id", this.mdao.id);
         MixedConcrete found = (MixedConcrete)Database.Find(MixedConcrete.class, query);
         assertEquals(found.id, this.mdao.id);

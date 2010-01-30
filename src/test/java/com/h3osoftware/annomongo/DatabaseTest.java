@@ -3,14 +3,11 @@ package com.h3osoftware.annomongo;
 import com.h3osoftware.annomongo.annotations.Collection;
 import com.h3osoftware.annomongo.annotations.Get;
 import com.h3osoftware.annomongo.annotations.Put;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import junit.framework.TestCase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DatabaseTest extends TestCase {
-
-    static class Methodless { }
 
     @Collection("Keyed")
     static class MethodsKeyedAnnotations extends AbstractDatabaseObject {
@@ -37,14 +34,6 @@ public class DatabaseTest extends TestCase {
 		assertEquals("h3osoftware", Database.Config.defaults().database);
 	}
 	
-	public void testSaveFailsOnMethodless(){
-		assertFalse(Database.Save(new Methodless()));
-	}
-	
-	public void testSaveFailsOnCollectionless(){
-		assertFalse(Database.Save(new Methodless()));
-	}
-	
 	public void testSaveFailsOnNull() {
 		assertFalse(Database.Save(null));
 	}
@@ -56,7 +45,7 @@ public class DatabaseTest extends TestCase {
 	}
 
     public void testFind(){
-        Map<String, Object> query = new HashMap<String, Object>();
+        DBObject query = new BasicDBObject();
         query.put("Name", "Clint");
         MethodsKeyedAnnotations m = (MethodsKeyedAnnotations)Database.Find(MethodsKeyedAnnotations.class, query);
         assertNotNull(m);

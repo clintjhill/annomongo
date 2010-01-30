@@ -42,7 +42,6 @@ public class WriterTest extends TestCase {
     }
 
     private Writer writer;
-    private WriterFixture fixture;
     private DBObject result;
 
     public void setUp(){
@@ -56,11 +55,11 @@ public class WriterTest extends TestCase {
     }
 
     public void testWriteValues(){
-        this.fixture = (WriterFixture)this.writer.writeValues(new WriterFixture(),this.result);
-        assertEquals(this.fixture.name, "Clint");
-        assertEquals(this.fixture.notherName, "Hill");
-        assertEquals(this.fixture.title, "Mr.");
-        assertEquals(this.fixture.title2, "Boss Man");
-        assertEquals(this.fixture.idValue, "4b625d1573b2844003dc6340");
+        WriterFixture fixture = (WriterFixture) this.writer.writeValues(new WriterFixture(), this.result);
+        assertEquals(fixture.name, "Clint");
+        assertEquals(fixture.notherName, "Hill");
+        assertEquals(fixture.title, "Mr.");
+        assertEquals(fixture.title2, "Boss Man");
+        assertEquals(fixture.idValue, "4b625d1573b2844003dc6340");
     }
 }

@@ -19,4 +19,26 @@ method name (dropping the "get").
 Assigned to a method (currently forces a setter) and allows naming or assumes
 method name (dropping the "set").
 
-Examples to come soon.
+
+== Example ==
+
+import com.h3osoftware.annomongo.*;
+
+@Collection("examples")
+public class Example extends AbstractDatabaseObject{
+
+    @Id
+    public String id;
+
+    @Field("name")
+    public String name;
+
+}
+
+Example ex = new Example();
+ex.name = "John Doe";
+ex.save();
+
+Finder query = new Finder(Example.class);
+Example result = (Example)query.where("name").isEqualTo("John Doe");
+

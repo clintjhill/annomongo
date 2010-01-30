@@ -3,7 +3,6 @@ package com.h3osoftware.annomongo;
 import com.mongodb.*;
 
 import java.net.UnknownHostException;
-import java.util.Map;
 
 /**
  * Author: Clint Hill
@@ -46,13 +45,11 @@ public class Database {
         return database;
     }
 
-    public static Object Find(Class<?> klass, Map<String, Object> query) {
-        if(query.isEmpty()) return null;
+    public static Object Find(Class<?> klass, DBObject query) {
+        if(query.keySet().size() <= 0) return null;
         query = checkForObjectId(query);
-        BasicDBObject queryObj = new BasicDBObject();
-        for(String key : query.keySet()) { queryObj.put(key, query.get(key)); }
         DBCollection coll = instance().getCollection(inference.collectionFromClass(klass));
-        DBObject result = coll.findOne(queryObj);
+        DBObject result = coll.findOne(query);
         Object resultObj = null;
         if(result != null) {
             try {
@@ -68,7 +65,6 @@ public class Database {
 	
 	public static boolean Save(Object o){
 		if (o == null) return false;
-		if (o.getClass().getMethods().length <= 0) return false;
 		BasicDBObject dbObj = reader.readValues(o);
         String collection = inference.collectionFromClass(o.getClass());
         if (collection == null) return false;
@@ -80,7 +76,7 @@ public class Database {
         return dbObj.get("_id") != null;
 	}
 
-    private static Map<String, Object> checkForObjectId(Map<String, Object> query){
+    private static DBObject checkForObjectId(DBObject query){
         for(String key : query.keySet()){
             if(key.equals("_id")){
                 String id = query.get(key).toString();
