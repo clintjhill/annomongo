@@ -49,3 +49,5 @@ Example result = query.where("name").isEqualTo("John Doe").result();
 
 AND and OR conditions in the Finder.
 Embedded documents - associations.
+Index annotations.
+JavaDocs.
