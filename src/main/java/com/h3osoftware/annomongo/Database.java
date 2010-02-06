@@ -45,7 +45,8 @@ public class Database {
         return database;
     }
 
-    public static Object Find(Class<?> klass, DBObject query) {
+    @SuppressWarnings("unchecked")
+    public static <T> T Find(Class<?> klass, DBObject query) {
         if(query.keySet().size() <= 0) return null;
         query = checkForObjectId(query);
         DBCollection coll = instance().getCollection(inference.collectionFromClass(klass));
@@ -60,7 +61,7 @@ public class Database {
                 e.printStackTrace();
             }
         }
-        return resultObj;
+        return (T) resultObj;
     }
 	
 	public static boolean Save(Object o){

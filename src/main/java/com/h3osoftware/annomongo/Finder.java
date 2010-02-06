@@ -5,6 +5,8 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import org.joda.time.DateTime;
 
+import static com.h3osoftware.annomongo.Database.Find;
+
 /**
  * Author: Clint Hill
  * User: clinthill
@@ -43,8 +45,9 @@ public class Finder {
         return this;
     }
 
-    public Object result(){
-        return Database.Find(klass, query());
+    @SuppressWarnings("unchecked")
+    public <T> T result(){
+        return (T) Find(klass, query());
     }
 
     DBObject query(){

@@ -1,8 +1,10 @@
+=== annomongo ===
 Annotated Java for mongoDB
 
 This is a simple library that allows you to create simple Java classes (POJO)
 that are annotated in a mongoDB fashion. It provides a database wrapper to
-the mongoDB Java driver as well.
+the mongoDB Java driver as well. The query facility is the Finder class with
+method chaining to allow for expressive queries.
 
 @Collection
 Assigned to a class and allows for the collection to be named or will assume
@@ -40,5 +42,10 @@ ex.name = "John Doe";
 ex.save();
 
 Finder query = new Finder(Example.class);
-Example result = (Example)query.where("name").isEqualTo("John Doe").result();
+Example result = query.where("name").isEqualTo("John Doe").result();
 
+
+== Things Missing ==
+
+AND and OR conditions in the Finder.
+Embedded documents - associations.

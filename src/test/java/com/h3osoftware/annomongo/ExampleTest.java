@@ -21,17 +21,16 @@ public class ExampleTest extends TestCase {
         @Field("name")
         public String name;
     }
-    public void testSaveExample(){
 
+    public void testSaveExample(){
         Example ex = new Example();
         ex.name = "John Doe";
         ex.save();
-
     }
 
     public void testFindExample(){
         Finder query = new Finder(Example.class);
-        Example result = (Example)query.where("name").isEqualTo("John Doe").result();
+        Example result = query.where("name").isEqualTo("John Doe").result();
         assertNotNull(result);
         assertNotNull(result.id);
         assertEquals(result.name, "John Doe");
