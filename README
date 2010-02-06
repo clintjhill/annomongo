@@ -40,5 +40,5 @@ ex.name = "John Doe";
 ex.save();
 
 Finder query = new Finder(Example.class);
-Example result = (Example)query.where("name").isEqualTo("John Doe");
+Example result = (Example)query.where("name").isEqualTo("John Doe").result();
 
